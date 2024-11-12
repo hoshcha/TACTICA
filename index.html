@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CS 1130 - Introduction to Computing</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
     <style>
         /* Basic Reset */
         * {
@@ -12,7 +13,7 @@
             box-sizing: border-box;
         }
 
-        /* Background container with blurred image */
+        /* Background and text styling */
         body, html {
             height: 100vh;
             display: flex;
@@ -22,20 +23,20 @@
             background: rgba(0, 0, 0, 0.8);
             overflow: hidden;
         }
-        
-        /* Floating animation for the content */
+
+        /* Content float animation */
         @keyframes float {
             0% { transform: translateY(0px); }
             50% { transform: translateY(-10px); }
             100% { transform: translateY(0px); }
         }
 
-        /* Larger, centered text with floating effect */
+        /* Centered content box */
         .content {
             position: relative;
             z-index: 1;
             text-align: center;
-            max-width: 900px; /* Increase width to make content box wider */
+            max-width: 900px;
             padding: 40px;
             background: rgba(0, 0, 0, 0.7);
             border-radius: 8px;
@@ -47,9 +48,18 @@
         }
 
         h1 {
-            color: #00e5ff;
+            font-family: 'Orbitron', sans-serif;
+            color: #ffffff; /* White color */
             font-size: 2.5rem;
             margin-bottom: 10px;
+            text-shadow: 
+                0 0 5px #ffffff, 
+                0 0 10px #ffffff, 
+                0 0 15px #00e5ff, 
+                0 0 20px #00e5ff, 
+                0 0 25px #00e5ff, 
+                0 0 30px #00e5ff, 
+                0 0 35px #00e5ff; /* Glowing neon effect */
         }
 
         h2 {
@@ -66,40 +76,35 @@
         }
 
         .assignment {
+            font-family: Arial, sans-serif;
             font-weight: bold;
             color: #00e5ff;
-            margin-top: 1em; /* Space between assignments */
+            margin-top: 1em;
         }
 
         .assignment-link {
-            text-decoration: underline; /* Underline the links */
+            text-decoration: underline;
             color: #F5F4FA;
         }
 
         .assignment-link:hover {
-            text-decoration: underline;
             color: #4dd0e1;
         }
 
-        /* Add spacing between each assignment and its link */
-        li {
-            margin-bottom: 4px; /* Space between assignment and link */
-        }
-
-        /* Background blur effect */
+        /* Background blur */
         #background {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('https://embed.pixiv.net/decorate.php?illust_id=38449578') no-repeat center center fixed;
+            background: url('https://miro.medium.com/max/6300/1*-diM6DMK5qvR5AOvqXRqqQ.jpeg') no-repeat center center fixed;
             background-size: cover;
             filter: blur(8px);
             z-index: 0;
         }
 
-        /* Particle effect */
+        /* Particle container */
         #particles-js {
             position: fixed;
             top: 0;
@@ -121,25 +126,25 @@
         <h2>Josh "Hoshcha" Matthew Chavez' Program List</h2>
         <ul>
             <li>
-                <span class="assignment">Assignment #1 </span>
+                <span class="assignment">Assignment #1</span>
                 <a href="https://hoshcha.github.io/KAERU/" class="assignment-link">
                     Conversion (Celsius to Fahrenheit, Fahrenheit to Celsius, Meters to Feet, Feet to Meters)
                 </a>
             </li>
             <li>
-                <span class="assignment">Assignment #2 </span>
+                <span class="assignment">Assignment #2</span>
                 <a href="https://i.pinimg.com/originals/e0/fb/b4/e0fbb4cc347bf93213c49fdb6b845685.jpg" class="assignment-link">
                     Income Tax Calculator
                 </a>
             </li>
             <li>
-                <span class="assignment">Assignment #3 </span>
+                <span class="assignment">Assignment #3</span>
                 <a href="https://i.pinimg.com/originals/13/b5/e1/13b5e107bdb34baa69ef6b18a8365f57.jpg" class="assignment-link">
                     Factorial (While Loop), Sum (Do While Loop), and Average (For Loop) of First N Natural Numbers
                 </a>
             </li>
             <li>
-                <span class="assignment">Assignment #4 </span>
+                <span class="assignment">Assignment #4</span>
                 <a href="https://i.pinimg.com/originals/79/03/b8/7903b8b09d12ce0239b10300a37f363d.jpg" class="assignment-link">
                     Simple Payroll
                 </a>
@@ -147,7 +152,7 @@
         </ul>
     </div>
 
-    <!-- Particle.js library -->
+    <!-- Particle.js script -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
         // Initialize particles.js
@@ -161,7 +166,7 @@
                     }
                 },
                 "color": {
-                    "value": "#00e5ff" // Miku teal color
+                    "value": "#00e5ff"
                 },
                 "shape": {
                     "type": "circle",
