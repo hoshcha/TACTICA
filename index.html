@@ -23,7 +23,14 @@
             overflow: hidden;
         }
         
-        /* Larger, centered text */
+        /* Floating animation for the content */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Larger, centered text with floating effect */
         .content {
             position: relative;
             z-index: 1;
@@ -35,7 +42,8 @@
             border: 2px solid #00bfae;
             color: #ffffff;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            font-size: 1.25rem;
+            font-size: 1.5rem;
+            animation: float 4s ease-in-out infinite;
         }
 
         h1 {
@@ -60,6 +68,7 @@
         .assignment {
             font-weight: bold;
             color: #80deea;
+            margin-top: 1em; /* Space between assignments */
         }
 
         .assignment-link {
