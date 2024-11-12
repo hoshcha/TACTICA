@@ -5,58 +5,103 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CS 1130 - Introduction to Computing</title>
     <style>
-        /* Set background image */
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Background container with blurred image */
         body, html {
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
             font-family: Arial, sans-serif;
-            background: url('https://embed.pixiv.net/decorate.php?illust_id=38449578') no-repeat center center fixed;
-            background-size: cover;
-            color: #ffffff;
+            background: rgba(0, 0, 0, 0.8);
+            overflow: hidden;
         }
         
-        /* Center content and add semi-transparent background */
+        /* Larger, centered text */
         .content {
+            position: relative;
+            z-index: 1;
             text-align: center;
-            max-width: 600px;
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.7); /* Semi-transparent black */
+            max-width: 700px;
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.7);
             border-radius: 8px;
-            border: 2px solid #00bfae; /* Miku teal color */
+            border: 2px solid #00bfae;
+            color: #ffffff;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            font-size: 1.25rem;
         }
 
-        h1, h2 {
-            color: #00bfae; /* Miku teal color */
+        h1 {
+            color: #00e5ff;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            color: #80deea;
+            font-size: 1.75rem;
+            margin-bottom: 20px;
         }
 
         ul {
-            text-align: left;
             list-style-type: none;
-            padding-left: 0;
+            text-align: left;
+            padding: 0;
             color: #e0f7fa;
         }
 
         .assignment {
             font-weight: bold;
-            color: #80deea; /* Lighter teal */
+            color: #80deea;
         }
 
         .assignment-link {
             text-decoration: none;
-            color: #00e5ff; /* Bright teal */
+            color: #00e5ff;
         }
 
         .assignment-link:hover {
             text-decoration: underline;
-            color: #4dd0e1; /* Softer teal */
+            color: #4dd0e1;
+        }
+
+        /* Background blur effect */
+        #background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://embed.pixiv.net/decorate.php?illust_id=38449578') no-repeat center center fixed;
+            background-size: cover;
+            filter: blur(8px);
+            z-index: 0;
+        }
+
+        /* Particle effect */
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
         }
     </style>
 </head>
 <body>
+    <!-- Background and particle layers -->
+    <div id="background"></div>
+    <div id="particles-js"></div>
+
+    <!-- Main content -->
     <div class="content">
         <h1>CS 1130 - Introduction to Computing</h1>
         <h2>Josh "Hoshcha" Matthew Chavez Program</h2>
@@ -67,25 +112,119 @@
                     Conversion (Celsius to Fahrenheit, Fahrenheit to Celsius, Meters to Feet, Feet to Meters)
                 </a>
             </li>
-            <li>
-                <span class="assignment">Assignment #2 - </span>
-                <a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/c7aa9d1c-f754-40ec-bab9-af705b19ca02/del9mdd-8fab6e39-bbb3-4c36-aa7d-ae587b20ac77.jpg/v1/fill/w_500,h_508,q_75,strp/cursed_hatsune_miku_image_5_by_meowsticthemagicscat_del9mdd-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NTA4IiwicGF0aCI6IlwvZlwvYzdhYTlkMWMtZjc1NC00MGVjLWJhYjktYWY3MDViMTljYTAyXC9kZWw5bWRkLThmYWI2ZTM5LWJiYjMtNGMzNi1hYTdkLWFlNTg3YjIwYWM3Ny5qcGciLCJ3aWR0aCI6Ijw9NTAwIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.TBc3OW2ZiPSArtLxBtOa62Trf8aPHfQ0cKD4M0r2V90" class="assignment-link">
-                    Income Tax Calculator
-                </a>
-            </li>
-            <li>
-                <span class="assignment">Assignment #3 - </span>
-                <a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/c7aa9d1c-f754-40ec-bab9-af705b19ca02/del9mdd-8fab6e39-bbb3-4c36-aa7d-ae587b20ac77.jpg/v1/fill/w_500,h_508,q_75,strp/cursed_hatsune_miku_image_5_by_meowsticthemagicscat_del9mdd-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NTA4IiwicGF0aCI6IlwvZlwvYzdhYTlkMWMtZjc1NC00MGVjLWJhYjktYWY3MDViMTljYTAyXC9kZWw5bWRkLThmYWI2ZTM5LWJiYjMtNGMzNi1hYTdkLWFlNTg3YjIwYWM3Ny5qcGciLCJ3aWR0aCI6Ijw9NTAwIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.TBc3OW2ZiPSArtLxBtOa62Trf8aPHfQ0cKD4M0r2V90" class="assignment-link">
-                    Factorial (While Loop), Sum (Do While Loop), and Average (For Loop) of First N Natural Numbers
-                </a>
-            </li>
-            <li>
-                <span class="assignment">Assignment #4 - </span>
-                <a href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/c7aa9d1c-f754-40ec-bab9-af705b19ca02/del9mdd-8fab6e39-bbb3-4c36-aa7d-ae587b20ac77.jpg/v1/fill/w_500,h_508,q_75,strp/cursed_hatsune_miku_image_5_by_meowsticthemagicscat_del9mdd-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NTA4IiwicGF0aCI6IlwvZlwvYzdhYTlkMWMtZjc1NC00MGVjLWJhYjktYWY3MDViMTljYTAyXC9kZWw5bWRkLThmYWI2ZTM5LWJiYjMtNGMzNi1hYTdkLWFlNTg3YjIwYWM3Ny5qcGciLCJ3aWR0aCI6Ijw9NTAwIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.TBc3OW2ZiPSArtLxBtOa62Trf8aPHfQ0cKD4M0r2V90" class="assignment-link">
-                    Simple Payroll
-                </a>
-            </li>
+            <!-- Add remaining assignments as needed -->
         </ul>
     </div>
+
+    <!-- Particle.js library -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // Initialize particles.js
+        particlesJS("particles-js", {
+            "particles": {
+                "number": {
+                    "value": 80,
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": "#00e5ff" // Miku teal color
+                },
+                "shape": {
+                    "type": "circle",
+                    "stroke": {
+                        "width": 0,
+                        "color": "#000000"
+                    },
+                    "polygon": {
+                        "nb_sides": 5
+                    },
+                },
+                "opacity": {
+                    "value": 0.5,
+                    "random": true,
+                    "anim": {
+                        "enable": false,
+                        "speed": 1,
+                        "opacity_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "size": {
+                    "value": 3,
+                    "random": true,
+                    "anim": {
+                        "enable": false,
+                        "speed": 40,
+                        "size_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#00e5ff",
+                    "opacity": 0.4,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 6,
+                    "direction": "none",
+                    "random": false,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false,
+                    "attract": {
+                        "enable": false,
+                        "rotateX": 600,
+                        "rotateY": 1200
+                    }
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "repulse"
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push"
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": {
+                        "distance": 400,
+                        "line_linked": {
+                            "opacity": 1
+                        }
+                    },
+                    "bubble": {
+                        "distance": 400,
+                        "size": 40,
+                        "duration": 2,
+                        "opacity": 8,
+                        "speed": 3
+                    },
+                    "repulse": {
+                        "distance": 200,
+                        "duration": 0.4
+                    },
+                    "push": {
+                        "particles_nb": 4
+                    },
+                    "remove": {
+                        "particles_nb": 2
+                    }
+                }
+            },
+            "retina_detect": true
+        });
+    </script>
 </body>
 </html>
