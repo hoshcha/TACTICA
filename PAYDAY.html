@@ -192,7 +192,7 @@
             </div>
 
             <div class="form-group">
-                <label for="hourlyRate">Hourly Pay Rate ($):</label>
+                <label for="hourlyRate">Hourly Pay Rate (₱):</label>
                 <input type="number" id="hourlyRate" required min="0">
             </div>
 
@@ -255,7 +255,7 @@
             }
 
             // Display the result
-            const resultText = `Employee: ${employeeName}<br>Hours Worked (per day): ${hoursWorked}<br>Pay Type: ${rateType.charAt(0).toUpperCase() + rateType.slice(1)}<br>Hourly Rate: $${hourlyRate.toFixed(2)}<br><strong>Total Pay: $${totalPay.toFixed(2)}</strong>`;
+            const resultText = `Employee: ${employeeName}<br>Hours Worked (per day): ${hoursWorked}<br>Pay Type: ${rateType.charAt(0).toUpperCase() + rateType.slice(1)}<br>Hourly Rate: ₱${hourlyRate.toFixed(2)}<br><strong>Total Pay: ₱${totalPay.toFixed(2)}</strong>`;
             document.getElementById('resultText').innerHTML = resultText;
             document.getElementById('result').style.display = 'block';
 
