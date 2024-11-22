@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tax Time 🥰</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <style>
+        /* General reset for the page */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Orbitron', sans-serif;
+            color: #00ffcc;
+            background-color: #000;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* Background and animation */
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("https://miro.medium.com/max/6300/1*-diM6DMK5qvR5AOvqXRqqQ.jpeg") no-repeat center center fixed;
+            background-size: cover;
+            transform: translateZ(0);
+            animation: moveBackground 20s infinite alternate ease-in-out;
+            filter: blur(8px);
+        }
+
+        @keyframes moveBackground {
+            0% { transform: translate(0, 0) scale(1.1); }
+            50% { transform: translate(10px, -10px) scale(1.1); }
+            100% { transform: translate(-10px, 10px) scale(1.1); }
+        }
+
+        /* Calculator container */
+        .container {
+            position: relative;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 450px;
+            text-align: center;
+            box-shadow: 0 0 15px #00ffcc;
+            z-index: 1;
+        }
+
+        h2 {
+            color: #ffffff;
+            text-shadow: 0 0 5px #00ffcc;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        input[type="number"], select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 16px;
+            border: none;
+            outline: none;
+            background-color: #222;
+            color: #00ffcc;
+            border-bottom: 2px solid #00ffcc;
+        }
+
+        button {
+            background-color: #00ffcc;
+            color: #000;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #ff00ff;
+            color: #fff;
+        }
+
+        .result-box {
+            font-family: Arial, sans-serif;
+            font-size: 25px;
+            margin-top: 20px;
+            text-shadow: 0 0 5px #00ffcc;
+            color: #ffffff;
+        }
+
+        /* Formula box styling */
+        .formula-box {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #00ffcc;
+            font-size: 16px;
+            width: 300px;
+            z-index: 2;
+        }
+
+        /* Back button styling */
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 10px 15px;
+            background-color: #ff00ff;
+            color: #ffffff;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 5px;
+            box-shadow: 0 0 10px #00ffcc;
+            transition: background-color 0.3s ease;
+            z-index: 10;
+        }
+
+        .back-button:hover {
+            background-color: #00ffcc;
+            color: #000;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Back Button -->
+    <a href="https://hoshcha.github.io/TACTICA/" class="back-button">Back</a>
+
+    <!-- Background Image -->
+    <div class="background"></div>
+
+    <!-- Formula Box -->
+    <div class="formula-box">
+        <h3>Tax Formula</h3>
+        <p><strong>Formula:</strong><br>Tax = Income × Tax Rate (20%)</p>
+        <p><strong>Example:</strong><br>If income is $10,000, tax = $10,000 × 0.20 = $2,000</p>
+    </div>
+
+    <!-- Calculator Container -->
+    <div class="container">
+        <h2>Income Tax Calculator</h2>
+
+        <label for="income">Enter Income:</label>
+        <input type="number" id="income" placeholder="Enter your income" />
+
+        <select id="currency">
+            <option value="USD">$ USD</option>
+            <option value="EUR">€ EUR</option>
+            <option value="GBP">£ GBP</option>
+            <option value="INR">₹ INR</option>
+            <option value="AUD">$ AUD</option>
+            <option value="CAD">$ CAD</option>
+            <option value="JPY">¥ JPY</option>
+            <option value="PHP">₱ PHP</option> <!-- Added Philippine Peso -->
+        </select>
+
+        <button onclick="calculateTax()">Calculate Tax</button>
+
+        <div id="resultBox" class="result-box"></div>
+    </div>
+
+    <script>
+        // Function to calculate tax
+        function calculateTax() {
+            let income = parseFloat(document.getElementById("income").value);
+            let currency = document.getElementById("currency").value;
+
+            const taxRate = 0.20;  // Tax rate of 20%
+            let tax = income * taxRate;
+
+            // Format numbers with commas
+            const formattedIncome = formatNumber(income);
+            const formattedTax = formatNumber(tax);
+
+            let resultText = `Income: ${currency} ${formattedIncome}\nTax: ${currency} ${formattedTax}`;
+            document.getElementById("resultBox").textContent = resultText;
+        }
+
+        // Function to format numbers with commas
+        function formatNumber(num) {
+            return num.toLocaleString('en-US');
+        }
+    </script>
+
+</body>
+</html>
