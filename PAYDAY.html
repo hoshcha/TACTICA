@@ -44,14 +44,35 @@
             100% { transform: translate(-10px, 10px) scale(1.1); }
         }
 
+        /* Back Button styling */
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 10px 15px;
+            background-color: #ff00ff;
+            color: #ffffff;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 5px;
+            box-shadow: 0 0 10px #00ffcc;
+            transition: background-color 0.3s ease;
+            z-index: 10;
+        }
+
+        .back-button:hover {
+            background-color: #00ffcc;
+            color: #000;
+        }
+
         /* Calculator container */
         .container {
             position: relative;
             background-color: rgba(0, 0, 0, 0.7);
             padding: 20px;
             border-radius: 10px;
-            max-width: 900px;  /* Updated width to 900px */
-            width: 100%;  /* Ensure the container takes full available space but doesn't exceed 900px */
+            max-width: 900px;
+            width: 100%;
             text-align: center;
             box-shadow: 0 0 15px #00ffcc;
             z-index: 1;
@@ -149,6 +170,9 @@
 </head>
 <body>
 
+    <!-- Back Button -->
+    <a href="https://hoshcha.github.io/TACTICA/" class="back-button">Back</a>
+
     <!-- Background Image -->
     <div class="background"></div>
 
@@ -168,7 +192,12 @@
             </div>
 
             <div class="form-group">
-                <label for="rateType">Pay Rate:</label>
+                <label for="hourlyRate">Hourly Pay Rate ($):</label>
+                <input type="number" id="hourlyRate" required min="0">
+            </div>
+
+            <div class="form-group">
+                <label for="rateType">Pay Rate Type:</label>
                 <select id="rateType" required>
                     <option value="weekly">Weekly</option>
                     <option value="monthly">Monthly</option>
@@ -207,59 +236,26 @@
             // Get input values
             const employeeName = document.getElementById('employeeName').value;
             const hoursWorked = parseFloat(document.getElementById('hoursWorked').value);
+            const hourlyRate = parseFloat(document.getElementById('hourlyRate').value);
             const rateType = document.getElementById('rateType').value;
 
             let totalPay = 0;
 
-            // Determine the total pay based on the selected rate type
-            if (rateType === 'weekly') {
-                totalPay = hoursWorked * 5;  // 5 working days per week
-            } else if (rateType === 'monthly') {
-                totalPay = hoursWorked * 20; // 20 working days per month
-            } else if (rateType === 'annually') {
-                totalPay = hoursWorked * 250; // 250 working days per year
+            // Calculate pay based on hourly rate or other rate types
+            if (hourlyRate > 0) {
+                totalPay = hoursWorked * hourlyRate;
+            } else {
+                if (rateType === 'weekly') {
+                    totalPay = hoursWorked * 5 * hourlyRate;  // 5 working days per week
+                } else if (rateType === 'monthly') {
+                    totalPay = hoursWorked * 20 * hourlyRate; // 20 working days per month
+                } else if (rateType === 'annually') {
+                    totalPay = hoursWorked * 250 * hourlyRate; // 250 working days per year
+                }
             }
 
             // Display the result
-            const resultText = `Employee: ${employeeName}<br>Hours Worked (per day): ${hoursWorked}<br>Pay Type: ${rateType.charAt(0).toUpperCase() + rateType.slice(1)}<br><strong>Total Pay: $${totalPay.toFixed(2)}</strong>`;
+            const resultText = `Employee: ${employeeName}<br>Hours Worked (per day): ${hoursWorked}<br>Pay Type: ${rateType.charAt(0).toUpperCase() + rateType.slice(1)}<br>Hourly Rate: $${hourlyRate.toFixed(2)}<br><strong>Total Pay: $${totalPay.toFixed(2)}</strong>`;
             document.getElementById('resultText').innerHTML = resultText;
             document.getElementById('result').style.display = 'block';
 
-            // Add result to history
-            const historyEntry = {
-                name: employeeName,
-                hours: hoursWorked,
-                rate: rateType,
-                pay: totalPay.toFixed(2),
-            };
-            payrollHistory.push(historyEntry);
-            updateHistory();
-        });
-
-        // Update the history list
-        function updateHistory() {
-            const historyList = document.getElementById('historyList');
-            historyList.innerHTML = ''; // Clear existing history
-
-            payrollHistory.forEach((entry, index) => {
-                const listItem = document.createElement('li');
-                listItem.innerHTML = `
-                    <strong>${entry.name}</strong> - Hours per Day: ${entry.hours} - Rate: ${entry.rate.charAt(0).toUpperCase() + entry.rate.slice(1)} - Total Pay: $${entry.pay}
-                `;
-                historyList.appendChild(listItem);
-            });
-        }
-
-        // Toggle the visibility of the history section
-        function toggleHistory() {
-            const historyList = document.getElementById('historyList');
-            if (historyList.style.display === '' || historyList.style.display === 'none') {
-                historyList.style.display = 'block';
-            } else {
-                historyList.style.display = 'none';
-            }
-        }
-    </script>
-
-</body>
-</html>
