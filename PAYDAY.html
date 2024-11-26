@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Income Tax Calculator</title>
+    <title>Payroll Management System (˶˃ ᵕ ˂˶) .ᐟ.ᐟ</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
     <style>
-        /* Overall page and theme styling */
+        /* General reset */
         * {
             margin: 0;
             padding: 0;
@@ -21,9 +21,10 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            flex-direction: column;
+            padding: 20px;
         }
 
+        /* Back button styling */
         .back-button {
             position: fixed;
             top: 20px;
@@ -69,6 +70,7 @@
             padding: 20px;
             border-radius: 10px;
             max-width: 900px;
+            width: 100%;
             text-align: center;
             box-shadow: 0 0 15px #00ffcc;
             z-index: 1;
@@ -81,18 +83,19 @@
             margin-bottom: 20px;
         }
 
-        label, button {
+        label {
+            display: block;
             font-size: 18px;
-            margin: 10px 0;
+            margin-bottom: 5px;
         }
 
-        input[type="number"] {
+        input[type="text"], input[type="number"] {
             width: 100%;
             padding: 10px;
             margin: 10px 0;
+            font-size: 16px;
             border: none;
             outline: none;
-            font-size: 16px;
             background-color: #222;
             color: #00ffcc;
             border-bottom: 2px solid #00ffcc;
@@ -105,8 +108,8 @@
             border: none;
             cursor: pointer;
             border-radius: 5px;
-            transition: 0.3s;
             font-weight: bold;
+            transition: 0.3s;
         }
 
         button:hover {
@@ -114,60 +117,133 @@
             color: #fff;
         }
 
-        .output {
-            font-family: Arial, sans-serif;
-            font-size: 25px;
+        table {
+            width: 100%;
             margin-top: 20px;
-            text-shadow: 0 0 5px #00ffcc;
+            border-collapse: collapse;
+            box-shadow: 0 0 10px #00ffcc;
+        }
+
+        th, td {
+            border: 1px solid #00ffcc;
+            padding: 8px;
             color: #ffffff;
-            text-align: left; /* Align the output text to the left */
-            padding-left: 20px; /* Add padding for better readability */
+        }
+
+        th {
+            background-color: #333;
+            color: #00ffcc;
+        }
+
+        .delete-button {
+            background-color: #ff00ff;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .delete-button:hover {
+            background-color: #00ffcc;
+            color: #000;
         }
     </style>
 </head>
 <body>
+    <!-- Back button -->
     <a href="https://hoshcha.github.io/TACTICA/" class="back-button">Back</a>
+
     <div class="background"></div>
     <div class="container">
-        <h1>Income Tax Calculator</h1>
-        <form id="taxForm">
-            <label for="taxableIncome">Enter your Taxable Income (₱):</label>
-            <input type="number" id="taxableIncome" min="1" placeholder="Enter income" required>
-            <button type="submit">Calculate Tax</button>
+        <h1>Payroll Management System</h1>
+        <form id="payroll-form">
+            <label for="employeeName">Employee Name:</label>
+            <input type="text" id="employeeName" required placeholder="Namedrop">
+            
+            <label for="daysWorked">Days Worked:</label>
+            <input type="number" id="daysWorked" required placeholder="Backs broken">
+            
+            <label for="dailyRate">Daily Rate:</label>
+            <input type="number" id="dailyRate" required placeholder="Moneydrop">
+            
+            <label for="deduction">Deduction Amount:</label>
+            <input type="number" id="deduction" required placeholder="Money drop...">
+            
+            <button type="button" onclick="addEmployee()">Add Employee</button>
         </form>
-        <div id="result" class="output"></div>
+
+        <table id="payroll-table">
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Employee Name</th>
+                    <th>Days Worked</th>
+                    <th>Daily Rate</th>
+                    <th>Gross Pay</th>
+                    <th>Deduction Amount</th>
+                    <th>Net Pay</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="payroll-body"></tbody>
+        </table>
     </div>
 
     <script>
-        document.getElementById("taxForm").addEventListener("submit", function(event) {
-            event.preventDefault(); // Prevent form submission
+        let payrollData = [];
+        
+        function addEmployee() {
+            const employeeName = document.getElementById('employeeName').value;
+            const daysWorked = parseInt(document.getElementById('daysWorked').value);
+            const dailyRate = parseFloat(document.getElementById('dailyRate').value);
+            const deduction = parseFloat(document.getElementById('deduction').value);
 
-            const income = parseFloat(document.getElementById("taxableIncome").value);
-            let tax = 0;
-            let resultText = '';
+            const grossPay = daysWorked * dailyRate;
+            const netPay = grossPay - deduction;
 
-            if (income <= 250000) {
-                tax = 0;
-                resultText = `Income Tax: ₱${tax.toFixed(2)} (No tax for income up to ₱250,000)`;
-            } else if (income <= 400000) {
-                tax = (income - 250000) * 0.20;
-                resultText = `Income Tax: ₱${tax.toFixed(2)} (20% of the excess over ₱250,000)`;
-            } else if (income <= 800000) {
-                tax = 30000 + (income - 400000) * 0.25;
-                resultText = `Income Tax: ₱${tax.toFixed(2)} (₱30,000 + 25% of the excess over ₱400,000)`;
-            } else if (income <= 2000000) {
-                tax = 130000 + (income - 800000) * 0.30;
-                resultText = `Income Tax: ₱${tax.toFixed(2)} (₱130,000 + 30% of the excess over ₱800,000)`;
-            } else if (income <= 8000000) {
-                tax = 490000 + (income - 2000000) * 0.32;
-                resultText = `Income Tax: ₱${tax.toFixed(2)} (₱490,000 + 32% of the excess over ₱2,000,000)`;
-            } else {
-                tax = 2410000 + (income - 8000000) * 0.35;
-                resultText = `Income Tax: ₱${tax.toFixed(2)} (₱2,410,000 + 35% of the excess over ₱8,000,000)`;
+            payrollData.push({
+                employeeName,
+                daysWorked,
+                dailyRate,
+                grossPay,
+                deduction,
+                netPay
+            });
+            
+            updateTable();
+            document.getElementById('payroll-form').reset();
+        }
+
+        function deleteEmployee(index) {
+            const confirmDelete = confirm("Are you sure you want to delete this employee?");
+            if (confirmDelete) {
+                payrollData.splice(index, 1);
+                updateTable();
             }
+        }
 
-            document.getElementById("result").innerHTML = resultText;
-        });
+        function updateTable() {
+            const tableBody = document.getElementById('payroll-body');
+            tableBody.innerHTML = '';
+
+            payrollData.forEach((employee, index) => {
+                const row = `
+                    <tr>
+                        <td>${index + 1}</td>
+                        <td>${employee.employeeName}</td>
+                        <td>${employee.daysWorked}</td>
+                        <td>${employee.dailyRate.toFixed(2)}</td>
+                        <td>${employee.grossPay.toFixed(2)}</td>
+                        <td>${employee.deduction.toFixed(2)}</td>
+                        <td>${employee.netPay.toFixed(2)}</td>
+                        <td><button class="delete-button" onclick="deleteEmployee(${index})">Delete</button></td>
+                    </tr>
+                `;
+                tableBody.innerHTML += row;
+            });
+        }
     </script>
 </body>
 </html>
