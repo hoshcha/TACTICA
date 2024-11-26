@@ -24,6 +24,27 @@
             padding: 20px;
         }
 
+        /* Back button styling */
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 10px 15px;
+            background-color: #ff00ff;
+            color: #ffffff;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 5px;
+            box-shadow: 0 0 10px #00ffcc;
+            transition: background-color 0.3s ease;
+            z-index: 10;
+        }
+
+        .back-button:hover {
+            background-color: #00ffcc;
+            color: #000;
+        }
+
         /* Background styling */
         .background {
             position: fixed;
@@ -131,6 +152,9 @@
     </style>
 </head>
 <body>
+    <!-- Back button -->
+    <a href="https://hoshcha.github.io/TACTICA/" class="back-button">Back</a>
+
     <div class="background"></div>
     <div class="container">
         <h1>Payroll Management System</h1>
