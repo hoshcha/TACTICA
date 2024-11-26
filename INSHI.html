@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Factorial, Sum, and Average ദ്ദി ༎ຶ‿༎ຶ )</title>
+    <title>Factorial, Sum, and Average</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
     <style>
         /* Overall page and theme styling */
@@ -11,7 +11,6 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            overflow: hidden;
         }
         body {
             font-family: 'Orbitron', sans-serif;
@@ -23,7 +22,6 @@
             align-items: center;
         }
 
-        /* Back button styling */
         .back-button {
             position: fixed;
             top: 20px;
@@ -53,19 +51,16 @@
             height: 100%;
             background: url("https://miro.medium.com/max/6300/1*-diM6DMK5qvR5AOvqXRqqQ.jpeg") no-repeat center center fixed;
             background-size: cover;
-            transform: translateZ(0);
             animation: moveBackground 20s infinite alternate ease-in-out;
             filter: blur(8px);
         }
 
-        /* Animation for background movement */
         @keyframes moveBackground {
             0% { transform: translate(0, 0) scale(1.1); }
             50% { transform: translate(10px, -10px) scale(1.1); }
             100% { transform: translate(-10px, 10px) scale(1.1); }
         }
 
-        /* Container for content */
         .container {
             position: relative;
             background-color: rgba(0, 0, 0, 0.7);
@@ -83,10 +78,12 @@
             font-size: 2em;
             margin-bottom: 20px;
         }
-        label, button, select {
+
+        label, button {
             font-size: 18px;
             margin: 10px 0;
         }
+
         input[type="number"] {
             width: 100%;
             padding: 10px;
@@ -98,6 +95,7 @@
             color: #00ffcc;
             border-bottom: 2px solid #00ffcc;
         }
+
         button {
             background-color: #00ffcc;
             color: #000;
@@ -108,51 +106,31 @@
             transition: 0.3s;
             font-weight: bold;
         }
+
         button:hover {
             background-color: #ff00ff;
             color: #fff;
         }
+
         .output {
             font-family: Arial, sans-serif;
             font-size: 25px;
             margin-top: 20px;
             text-shadow: 0 0 5px #00ffcc;
             color: #ffffff;
-        }
-        select {
-            width: 100%;
-            padding: 10px;
-            background-color: #222;
-            color: #00ffcc;
-            border: none;
-            outline: none;
-            font-size: 16px;
-            border-bottom: 2px solid #00ffcc;
-            margin-top: 10px;
+            text-align: left; /* Align the output text to the left */
+            padding-left: 20px; /* Add padding for better readability */
         }
     </style>
 </head>
 <body>
-    <!-- Back button -->
     <a href="https://hoshcha.github.io/TACTICA/" class="back-button">Back</a>
-
-    <!-- Background -->
     <div class="background"></div>
-
-    <!-- Factorial, Sum, and Average Container -->
     <div class="container">
         <h1>Factorial, Sum, and Average</h1>
         <form id="calculationForm">
             <label for="numberInput">Enter a Number (N):</label>
             <input type="number" id="numberInput" min="1" placeholder="Enter a positive integer + (¬`‸´¬)" required>
-
-            <label for="operationSelect">Select Operation:</label>
-            <select id="operationSelect" required>
-                <option value="factorial">Factorial</option>
-                <option value="sum">Sum</option>
-                <option value="average">Average</option>
-            </select>
-
             <button type="submit">Calculate</button>
         </form>
         <div id="result" class="output"></div>
@@ -163,43 +141,37 @@
             event.preventDefault(); // Prevent form submission
 
             const n = parseInt(document.getElementById("numberInput").value);
-            const operation = document.getElementById("operationSelect").value;
 
             if (isNaN(n) || n <= 0) {
                 alert("Please enter a valid positive integer.");
                 return;
             }
 
-            let resultText = "";
-
-            // Perform selected operation
-            if (operation === "factorial") {
-                let factorial = 1;
-                let i = 1;
-                while (i <= n) {
-                    factorial *= i;
-                    i++;
-                }
-                resultText = `Factorial of ${n} (while loop): ${factorial}`;
-            } else if (operation === "sum") {
-                let sum = 0;
-                let j = 1;
-                do {
-                    sum += j;
-                    j++;
-                } while (j <= n);
-                resultText = `Sum of first ${n} numbers (do-while loop): ${sum}`;
-            } else if (operation === "average") {
-                let sum = 0;
-                for (let k = 1; k <= n; k++) {
-                    sum += k;
-                }
-                const average = sum / n;
-                resultText = `Average of first ${n} numbers (for loop): ${average.toFixed(2)}`;
+            // Calculate Factorial (using while loop)
+            let factorial = 1;
+            let i = 1;
+            while (i <= n) {
+                factorial *= i;
+                i++;
             }
 
-            // Display the result
-            document.getElementById("result").innerHTML = resultText;
+            // Calculate Sum (using do-while loop)
+            let sum = 0;
+            let j = 1;
+            do {
+                sum += j;
+                j++;
+            } while (j <= n);
+
+            // Calculate Average (using for loop)
+            const average = sum / n;
+
+            // Display results
+            document.getElementById("result").innerHTML = `
+                Factorial of ${n}: ${factorial}<br>
+                Sum of first ${n} numbers: ${sum}<br>
+                Average of first ${n} numbers: ${average.toFixed(2)}
+            `;
         });
     </script>
 </body>
