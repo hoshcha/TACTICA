@@ -149,6 +149,21 @@
             background-color: #00ffcc;
             color: #000;
         }
+
+        .delete-all-button {
+            background-color: #ff0000;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .delete-all-button:hover {
+            background-color: #ff7f7f;
+        }
     </style>
 </head>
 <body>
@@ -189,11 +204,14 @@
             </thead>
             <tbody id="payroll-body"></tbody>
         </table>
+
+        <!-- Delete All Employees Button -->
+        <button class="delete-all-button" onclick="confirmDeleteAll()">Delete All Employees</button>
     </div>
 
     <script>
         let payrollData = [];
-        
+
         function addEmployee() {
             const employeeName = document.getElementById('employeeName').value;
             const daysWorked = parseInt(document.getElementById('daysWorked').value);
@@ -221,6 +239,17 @@
             if (confirmDelete) {
                 payrollData.splice(index, 1);
                 updateTable();
+            }
+        }
+
+        function confirmDeleteAll() {
+            const firstConfirmation = confirm("Are you sure you want to delete all employees?");
+            if (firstConfirmation) {
+                const secondConfirmation = confirm("Blud you can't go back, frfr?");
+                if (secondConfirmation) {
+                    payrollData = [];
+                    updateTable();
+                }
             }
         }
 
